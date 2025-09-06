@@ -13,10 +13,15 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-@PostMapping("/register")
-@ResponseStatus(HttpStatus.CREATED)
-    public UserResponse register(@RequestBody UserRequest request){
- return userService.registerUser(request);
+//@PostMapping("/register")
+//@ResponseStatus(HttpStatus.CREATED)
+//    public UserResponse register(@RequestBody UserRequest request){
+// return userService.registerUser(request);
+
+    @GetMapping("/register")
+    public String debugRegisterGet() {
+        System.out.println("⚠️ Someone is calling /api/register with GET!");
+        return "This endpoint only supports POST.";
 
 
 
