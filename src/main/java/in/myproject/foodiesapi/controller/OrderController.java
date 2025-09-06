@@ -13,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/orders")
+@CrossOrigin(origins = "https://storied-duckanoo-76aa1f.netlify.app")
 @AllArgsConstructor
 public class OrderController {
 
