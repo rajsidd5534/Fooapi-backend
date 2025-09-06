@@ -63,8 +63,7 @@ public class SecurityConfig {
 
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        // Allow all origins during development
-        config.addAllowedOriginPattern("*");
+        config.setAllowedOrigins(List.of("https://storied-duckanoo-76aa1f.netlify.app/", "https://thunderous-taffy-613380.netlify.app/"));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
