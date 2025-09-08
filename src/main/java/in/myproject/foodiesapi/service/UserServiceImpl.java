@@ -5,7 +5,6 @@ import in.myproject.foodiesapi.io.UserRequest;
 import in.myproject.foodiesapi.io.UserResponse;
 import in.myproject.foodiesapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,9 +17,14 @@ public class UserServiceImpl implements UserService  {
     private final AuthenticationFaced authenticationFaced;
     @Override
     public UserResponse registerUser(UserRequest request) {
- UserEntity newUser = convertToEntity(request);
- newUser = userRepository.save(newUser);
- return  convertToResponse(newUser);
+        try {
+            UserEntity newUser = convertToEntity(request);
+            newUser = userRepository.save(newUser);
+            return convertToResponse(newUser);
+        } catch (Exception e) {
+            e.printStackTrace(); // Logs in Railway
+            throw new RuntimeException("Registration failed: " + e.getMessage());
+        }
     }
 
     @Override
