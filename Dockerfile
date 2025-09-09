@@ -1,14 +1,17 @@
-# Step 1: Use official Java image
+# Stage 1: Build JAR using Maven
+FROM maven:3.9.5-eclipse-temurin-17 AS build
+
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run Spring Boot app
 FROM openjdk:17-jdk-slim
 
-# Step 2: Set working directory
 WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-# Step 3: Copy the JAR file into the container
-COPY target/foodiesapi-0.0.1-SNAPSHOT.jar app.jar
-
-# Step 4: Expose port 8080 (Spring Boot default)
 EXPOSE 8080
 
-# Step 5: Run the jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
