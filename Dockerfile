@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificat
 WORKDIR /app
 
 # Copy the JAR file from target folder
-COPY target/*.jar app.jar
+COPY target/app.jar app.jar
 
 # Expose port
 EXPOSE 8080
