@@ -11,8 +11,5 @@ RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificat
 # Step 3: Copy the JAR file into the container
 COPY target/app.jar app.jar
 
-# Step 4: Expose port 8080 (Spring Boot default)
-EXPOSE 8080
-
 # Step 5: Run the jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
