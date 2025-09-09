@@ -1,17 +1,18 @@
-# Use official OpenJDK image
+# Step 1: Use official Java image
 FROM openjdk:17-jdk-slim
+
+# Step 2: Set working directory
+WORKDIR /app
 
 # Install CA certificates for MongoDB Atlas SSL
 RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
 
-# Set working directory
-WORKDIR /app
 
-# Copy the JAR file from target folder
-COPY target/app.jar app.jar
+# Step 3: Copy the JAR file into the container
+COPY target/foodiesapi-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose port
+# Step 4: Expose port 8080 (Spring Boot default)
 EXPOSE 8080
 
-# Run the app
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+# Step 5: Run the jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
